@@ -192,21 +192,11 @@ class PayeRegistrationConnectorISpec extends IntegrationSpecBase {
 
   "Director Details" should {
     val director1 = Director(
-      name = Name(
-        forename = Some("Fourname"),
-        otherForenames = None,
-        surname = Some("Sirname"),
-        title = Some("Ms")
-      ),
+      name = "Ms Fourname Sirname",
       nino = Some("nino")
     )
     val director2 = Director(
-      name = Name(
-        forename = Some("FirstName"),
-        otherForenames = Some("MiddleName"),
-        surname = Some("LastName"),
-        title = Some("Mrs")
-      ),
+      name = "Mrs FirstName MiddleName LastName",
       nino = Some("nino2")
     )
     val dirList = Seq(director1, director2)

@@ -16,9 +16,8 @@
 package payeregistrationapi
 
 import com.github.tomakehurst.wiremock.client.WireMock._
-import connectors.CoHoAPIConnector
+import connectors.IncorporationInformationConnector
 import itutil.{IntegrationSpecBase, WiremockHelper}
-import models.api.Name
 import models.external.{CHROAddress, Officer, OfficerList}
 import play.api.{Application, Play}
 import play.api.inject.guice.GuiceApplicationBuilder
@@ -36,6 +35,8 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
   val additionalConfiguration = Map(
     "microservice.services.coho-api.host" -> s"$mockHost",
     "microservice.services.coho-api.port" -> s"$mockPort",
+    "microservice.services.incorporation-information.host" -> s"$mockHost",
+    "microservice.services.incorporation-information.port" -> s"$mockPort",
     "application.router" -> "testOnlyDoNotUseInAppConf.Routes"
   )
 
@@ -81,7 +82,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
 
     "get a registered office address" in {
 
-      val cohoAPIConnector = new CoHoAPIConnector(metrics)
+      val cohoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = cohoAPIConnector.getRegisteredOfficeAddress(testTransId)
 
@@ -91,7 +92,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     }
 
     "throw a BadRequestException" in {
-      val coHoAPIConnector = new CoHoAPIConnector(metrics)
+      val coHoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = coHoAPIConnector.getRegisteredOfficeAddress(testTransId)
 
@@ -101,7 +102,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     }
 
     "throw an Exception" in {
-      val coHoAPIConnector = new CoHoAPIConnector(metrics)
+      val coHoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = coHoAPIConnector.getRegisteredOfficeAddress(testTransId)
 
@@ -112,18 +113,18 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
   }
 
   "getOfficerList" should {
-    val url = s"/incorporation-frontend-stubs/$testTransId/officer-list"
+    val url = s"/incorporation-information/$testTransId/officer-list"
 
     val tstOfficerListModel = OfficerList(
       items = Seq(
         Officer(
-          name = Name(Some("test1"), Some("test11"), Some("testa"), Some("Mr")),
+          name = "Mr test1 test11 testa",
           role = "cic-manager",
           resignedOn = None,
           appointmentLink = None
         ),
         Officer(
-          name = Name(Some("test2"), Some("test22"), Some("testb"), Some("Mr")),
+          name = "Mr test2 test22 testb",
           role = "corporate-director",
           resignedOn = None,
           appointmentLink = None
@@ -143,31 +144,17 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     val tstOfficerListJson =
       """{
         |  "items" : [ {
-        |    "name" : "test",
-        |    "name_elements" : {
-        |      "forename" : "test1",
-        |      "honours" : "test",
-        |      "other_forenames" : "test11",
-        |      "surname" : "testa",
-        |      "title" : "Mr"
-        |    },
+        |    "name" : "Mr test1 test11 testa",
         |    "officer_role" : "cic-manager"
         |  }, {
-        |    "name" : "test",
-        |    "name_elements" : {
-        |      "forename" : "test2",
-        |      "honours" : "test",
-        |      "other_forenames" : "test22",
-        |      "surname" : "testb",
-        |      "title" : "Mr"
-        |    },
+        |    "name" : "Mr test2 test22 testb",
         |    "officer_role" : "corporate-director"
         |  } ]
         |}""".stripMargin
 
     "get an officer list" in {
 
-      val cohoAPIConnector = new CoHoAPIConnector(metrics)
+      val cohoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = cohoAPIConnector.getOfficerList(testTransId)
 
@@ -177,7 +164,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     }
 
     "get an empty officer list when CoHo API returns a NotFoundException" in {
-      val coHoAPIConnector = new CoHoAPIConnector(metrics)
+      val coHoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = coHoAPIConnector.getOfficerList(testTransId)
 
@@ -187,7 +174,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     }
 
     "throw a BadRequestException" in {
-      val coHoAPIConnector = new CoHoAPIConnector(metrics)
+      val coHoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = coHoAPIConnector.getOfficerList(testTransId)
 
@@ -197,7 +184,7 @@ class CoHoAPIConnectorISpec extends IntegrationSpecBase {
     }
 
     "throw an Exception" in {
-      val coHoAPIConnector = new CoHoAPIConnector(metrics)
+      val coHoAPIConnector = new IncorporationInformationConnector(metrics)
 
       def getResponse = coHoAPIConnector.getOfficerList(testTransId)
 

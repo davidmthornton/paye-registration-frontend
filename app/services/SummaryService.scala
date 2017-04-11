@@ -204,7 +204,7 @@ trait SummarySrv {
           case None => Right("")
         },
         changeLink = Some(controllers.userJourney.routes.DirectorDetailsController.directorDetails()),
-        questionArgs = Some(Seq(List(director.name.forename, director.name.surname).flatten.mkString(" "))),
+        questionArgs = Some(Seq(director.name)),
         commonQuestionKey = Some("director")
       )
     }

@@ -92,12 +92,7 @@ object TestPAYERegSetupForm extends RequiredBooleanForm with DateForm {
         "description" -> optional(text)
       )(SICCode.apply)(SICCode.unapply)),
       "directors" -> list(mapping(
-        "name" -> mapping(
-          "firstName" -> optional(text),
-          "middleName" -> optional(text),
-          "lastName" -> optional(text),
-          "title" -> optional(text)
-        )(Name.apply)(Name.unapply),
+        "name" -> text,
         "nino" -> optional(text)
       )(Director.apply)(Director.unapply)),
       "payeContact" -> mapping(

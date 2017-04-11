@@ -21,7 +21,7 @@ import connectors.PAYERegistrationConnector
 import enums.PAYEStatus
 import fixtures.PAYERegistrationFixture
 import models.api.{PAYEContact => PAYEContactAPI}
-import models.api.{Director, Employment, Name, SICCode, CompanyDetails => CompanyDetailsAPI, PAYERegistration => PAYERegistrationAPI}
+import models.api.{Director, Employment, SICCode, CompanyDetails => CompanyDetailsAPI, PAYERegistration => PAYERegistrationAPI}
 import models.view.{PAYEContactDetails, Summary, SummaryRow, SummarySection}
 import models.{Address, DigitalContactDetails}
 import org.mockito.ArgumentMatchers
@@ -62,12 +62,7 @@ class SummaryServiceSpec extends PAYERegSpec with PAYERegistrationFixture {
     sicCodes = simpleSICCodes,
     directors = List(
       Director(
-        name = Name(
-          forename = Some("Timothy"),
-          otherForenames = Some("Potterley-Smythe"),
-          surname = Some("Buttersford"),
-          title = Some("Mr")
-        ),
+        name = "Timothy Buttersford",
         nino = Some("ZZ123456A")
       )
     ),
@@ -264,12 +259,7 @@ class SummaryServiceSpec extends PAYERegSpec with PAYERegistrationFixture {
         sicCodes = simpleSICCodes,
         directors = List(
           Director(
-            name = Name(
-              forename = Some("Timothy"),
-              otherForenames = Some("Potterley-Smythe"),
-              surname = Some("Buttersford"),
-              title = Some("Mr")
-            ),
+            name = "Timothy Buttersford",
             nino = Some("ZZ123456A")
           )
         ),
@@ -741,21 +731,11 @@ class SummaryServiceSpec extends PAYERegSpec with PAYERegistrationFixture {
     "return a valid director details block" in new Setup {
       val directorDetailsModel = List(
         Director(
-          name = Name(
-            forename = Some("Timothy"),
-            otherForenames = Some("Potterley-Smythe"),
-            surname = Some("Buttersford"),
-            title = Some("Mr")
-          ),
+          name = "Timothy Buttersford",
           nino = Some("ZZ123456A")
         ),
         Director(
-          name = Name(
-            forename = Some("Pierre"),
-            otherForenames = Some("Paul"),
-            surname = Some("Simpson"),
-            title = Some("Mr")
-          ),
+          name = "Pierre Simpson",
           nino = None
         )
       )

@@ -16,7 +16,7 @@
 
 package fixtures
 
-import models.api.{Director, Name}
+import models.api.Director
 import models.external._
 import models.view.Directors
 
@@ -51,13 +51,13 @@ trait CoHoAPIFixture {
   val validOfficerList = OfficerList(
     items = Seq(
       Officer(
-        name = Name(Some("test1"), Some("test11"), Some("testa"), Some("Mr")),
+        name = "Mr test1 test11 testa",
         role = "cic-manager",
         resignedOn = None,
         appointmentLink = None
       ),
       Officer(
-        name = Name(Some("test2"), Some("test22"), Some("testb"), Some("Mr")),
+        name = "Mr test2 test22 testb",
         role = "corporate-director",
         resignedOn = None,
         appointmentLink = None
@@ -68,7 +68,7 @@ trait CoHoAPIFixture {
   val validDirectorDetails = Directors(
     directorMapping = Map(
       "0" -> Director(
-        name = Name(Some("test2"), Some("test22"), Some("testb"), Some("Mr")),
+        name = "Mr test2 test22 testb",
         nino = None
       )
     )

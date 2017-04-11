@@ -31,7 +31,7 @@ import scala.concurrent.Future
 
 class CoHoAPIServiceSpec extends PAYERegSpec with KeystoreFixture with CoHoAPIFixture {
 
-  val mockCoHoAPIConnector = mock[CoHoAPIConnector]
+  val mockCoHoAPIConnector = mock[IncorporationInformationConnector]
 
   trait Setup {
     val service = new CoHoAPISrv {
@@ -40,9 +40,9 @@ class CoHoAPIServiceSpec extends PAYERegSpec with KeystoreFixture with CoHoAPIFi
     }
   }
 
-  val tstSuccessResult = CohoApiSuccessResponse(validCoHoCompanyDetailsResponse)
-  val tstBadRequestResult = CohoApiBadRequestResponse
-  val tstInternalErrorResult = CohoApiErrorResponse(new RuntimeException)
+  val tstSuccessResult = IncorpInfoSuccessResponse(validCoHoCompanyDetailsResponse)
+  val tstBadRequestResult = IncorpInfoBadRequestResponse
+  val tstInternalErrorResult = IncorpInfoErrorResponse(new RuntimeException)
 
   implicit val hc = HeaderCarrier()
 

@@ -16,7 +16,7 @@
 
 package models.view
 
-import models.api.{Director, Name}
+import models.api.Director
 import play.api.libs.json.Json
 import uk.gov.hmrc.play.test.UnitSpec
 
@@ -84,15 +84,15 @@ class DirectorsSpec extends UnitSpec {
 
   "Directors View Model" should {
 
-    val tstModel = Directors(Map("1" -> Director(name = Name(Some("James"), None, None, None), nino = Some("ZZ123456A"))))
+    val tstModel = Directors(Map("1" -> Director(name = "James", nino = Some("ZZ123456A"))))
     val tstJson = Json.parse(
       s"""{
          |  "directorMapping":{
          |    "1":{
          |      "director":{
-         |        "forename":"James"
+         |        "name":"James"
          |      },
-         |    "nino":"ZZ123456A"
+         |      "nino":"ZZ123456A"
          |    }
          |  }
          |}""".stripMargin)

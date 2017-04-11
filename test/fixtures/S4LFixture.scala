@@ -18,7 +18,7 @@ package fixtures
 
 import java.time.LocalDate
 
-import models.api.{Director, Name}
+import models.api.Director
 import models.view._
 import models.{Address, DigitalContactDetails}
 
@@ -74,11 +74,11 @@ trait S4LFixture {
   val validDirectorDetailsViewModel = Directors(
     directorMapping = Map(
       "0" -> Director(
-        name = Name(Some("Bob"), None, Some("Smith"), None),
+        name = "Bob Smith",
         nino = Some("NINO")
       ),
       "1" -> Director(
-        name = Name(Some("Michael"), Some("Jay"), Some("Fudgedybar"), None),
+        name = "Michael Jay Fudgedybar",
         nino = None
       )
     )

@@ -31,14 +31,14 @@ import scala.concurrent.Future
 
 @Singleton
 class CoHoAPIService @Inject()(injkeystoreConnector: KeystoreConnector,
-                               injCoHoAPIConnector: CoHoAPIConnector) extends CoHoAPISrv {
+                               injCoHoAPIConnector: IncorporationInformationConnector) extends CoHoAPISrv {
   override val keystoreConnector = injkeystoreConnector
   override val coHoAPIConnector = injCoHoAPIConnector
 }
 
 trait CoHoAPISrv {
 
-  val coHoAPIConnector : CoHoAPIConnect
+  val coHoAPIConnector : IncorporationInformationConnect
   val keystoreConnector : KeystoreConnect
 
   def fetchAndStoreCoHoCompanyDetails(regId: String)(implicit hc: HeaderCarrier): Future[DownstreamOutcome.Value] = {
@@ -48,9 +48,9 @@ trait CoHoAPISrv {
     } yield outcome
   }
 
-  private def processCoHoResponse(resp: CohoApiResponse)(implicit hc: HeaderCarrier): Future[DownstreamOutcome.Value] = {
+  private def processCoHoResponse(resp: IncorpInfoResponse)(implicit hc: HeaderCarrier): Future[DownstreamOutcome.Value] = {
     resp match {
-      case CohoApiSuccessResponse(companyDetails) =>
+      case IncorpInfoSuccessResponse(companyDetails) =>
         keystoreConnector.cache[CoHoCompanyDetailsModel](CacheKeys.CoHoCompanyDetails.toString, companyDetails) map {
           cacheMap => DownstreamOutcome.Success
         }

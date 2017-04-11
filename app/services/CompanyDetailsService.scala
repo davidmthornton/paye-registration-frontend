@@ -33,7 +33,7 @@ class CompanyDetailsService @Inject()(injPAYERegistrationConnector: PAYERegistra
                                       injCoHoAPIService: CoHoAPIService,
                                       injS4LService: S4LService,
                                       injCompRegConnector : CompanyRegistrationConnector,
-                                      injCohoAPIConnector: CoHoAPIConnector) extends CompanyDetailsSrv {
+                                      injCohoAPIConnector: IncorporationInformationConnector) extends CompanyDetailsSrv {
 
   override val payeRegConnector = injPAYERegistrationConnector
   override val compRegConnector = injCompRegConnector
@@ -46,7 +46,7 @@ trait CompanyDetailsSrv {
 
   val payeRegConnector: PAYERegistrationConnect
   val compRegConnector: CompanyRegistrationConnect
-  val cohoAPIConnector: CoHoAPIConnect
+  val cohoAPIConnector: IncorporationInformationConnect
   val cohoService: CoHoAPISrv
   val s4LService: S4LSrv
 

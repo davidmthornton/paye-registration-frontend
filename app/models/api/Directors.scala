@@ -19,27 +19,11 @@ package models.api
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-case class Name(
-                 forename: Option[String],
-                 otherForenames: Option[String],
-                 surname: Option[String],
-                 title: Option[String]
-                 )
-
-object Name {
-  implicit val format = (
-    (__ \ "forename").formatNullable[String] and
-      (__ \ "other_forenames").formatNullable[String] and
-      (__ \ "surname").formatNullable[String] and
-      (__ \ "title").formatNullable[String]
-  )(Name.apply, unlift(Name.unapply))
-}
-
-case class Director(name: Name, nino: Option[String])
+case class Director(name: String, nino: Option[String])
 
 object Director {
   implicit val format = (
-    (__ \ "director").format[Name] and
+    (__ \ "director" \ "name").format[String] and
       (__ \ "nino").formatNullable[String]
     )(Director.apply, unlift(Director.unapply))
 }

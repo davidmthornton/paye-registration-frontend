@@ -18,7 +18,7 @@ package controllers.userJourney
 
 import builders.AuthBuilder
 import enums.DownstreamOutcome
-import models.api.{Director, Name}
+import models.api.Director
 import models.view.{Directors, Ninos, UserEnteredNino}
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito._
@@ -50,12 +50,7 @@ class DirectorDetailsControllerSpec extends PAYERegSpec {
     Directors(
       Map(
         "0" -> Director(
-          Name(
-            Some("testName"),
-            Some("testName"),
-            Some("testName"),
-            Some("testName")
-          ),
+          "testName",
           Some("testNino")
         )
       )

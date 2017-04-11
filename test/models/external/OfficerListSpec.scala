@@ -16,7 +16,6 @@
 
 package models.external
 
-import models.api.Name
 import play.api.libs.json.Json
 import testHelpers.PAYERegSpec
 
@@ -24,13 +23,13 @@ class OfficerListSpec extends PAYERegSpec {
   val tstOfficerList = OfficerList(
     items = Seq(
       Officer(
-        name = Name(Some("test1"), Some("test11"), Some("testa"), Some("Mr")),
+        name = "John Jones",
         role = "cic-manager",
         resignedOn = None,
         appointmentLink = None
       ),
       Officer(
-        name = Name(Some("test2"), Some("test22"), Some("testb"), Some("Mr")),
+        name = "Bob Smythe",
         role = "corporate-director",
         resignedOn = None,
         appointmentLink = None
@@ -41,24 +40,10 @@ class OfficerListSpec extends PAYERegSpec {
   val tstOfficerListJson = Json.parse(
     """{
       |  "items" : [ {
-      |    "name" : "test",
-      |    "name_elements" : {
-      |      "forename" : "test1",
-      |      "honours" : "test",
-      |      "other_forenames" : "test11",
-      |      "surname" : "testa",
-      |      "title" : "Mr"
-      |    },
+      |    "name" : "John Jones",
       |    "officer_role" : "cic-manager"
       |  }, {
-      |    "name" : "test",
-      |    "name_elements" : {
-      |      "forename" : "test2",
-      |      "honours" : "test",
-      |      "other_forenames" : "test22",
-      |      "surname" : "testb",
-      |      "title" : "Mr"
-      |    },
+      |    "name" : "Bob Smythe",
       |    "officer_role" : "corporate-director"
       |  } ]
       |}""".stripMargin

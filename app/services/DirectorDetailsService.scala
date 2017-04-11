@@ -97,7 +97,7 @@ trait DirectorDetailsSrv {
 
   def createDisplayNamesMap(directors: Directors): Map[String, String] = {
     directors.directorMapping.map {
-      case(k, v) => (k, List(v.name.forename, v.name.surname).flatten.mkString(" "))
+      case(k, v) => (k, v.name)
     }
   }
 
